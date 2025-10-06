@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reviews xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="reviews.xsd">
+
+  <book name="Imaginary">
+    <review user="Alice" rating="5">Amazing imagination!</review>
+    <review user="Bob" rating="4">Good, but a bit lengthy.</review>
+  </book>
+
+  <book name="AI Revolution">
+    <review user="John" rating="5">Very informative about AI.</review>
+    <review user="Mary" rating="4">Loved it!</review>
+  </book>
+
+</reviews>

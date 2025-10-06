@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Order Management - Oxford's Library</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: #2c3e50;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+header nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+.content {
+  padding: 30px;
+  max-width: 900px;
+  margin: 30px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+h3 {
+  margin-top: 0;
+}
+ul {
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 10px;
+}
+button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button.sent {
+  background: #2ecc71;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Oxford's Library - Orders Management</h1>
+  <nav>
+    <ul>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="orders.html">Orders</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="content">
+  <h3>Orders</h3>
+  <div id="order-list">
+    <!-- Orders grouped by theme will appear here -->
+  </div>
+</div>
+
+<script>
+
+let orders = [
+  { id: 1, theme: "Fiction", book: "Imaginary", price: 270, status: "Pending" },
+  { id: 2, theme: "Science", book: "Quantum Leap", price: 315, status: "Pending" },
+  { id: 3, theme: "Fiction", book: "Green World", price: 237.5, status: "Pending" },
+  { id: 4, theme: "Technology", book: "AI Revolution", price: 450, status: "Pending" },
+  { id: 5, theme: "Motivation", book: "Run", price: 162, status: "Pending" }
+];
+
+
+function displayOrders() {
+  const container = document.getElementById("order-list");
+  container.innerHTML = "";
+
+  const grouped = {};
+  orders.forEach(order => {
+    if (!grouped[order.theme]) grouped[order.theme] = [];
+    grouped[order.theme].push(order);
+  });
+
+  for (let theme in grouped) {
+    let html = `<h4>${theme}</h4><ul>`;
+    grouped[theme].forEach(order => {
+      html += `<li>
+        ${order.book} - ₹${order.price.toFixed(2)}
+        <button class="${order.status === 'Pending' ? '' : 'sent'}" onclick="toggleOrderStatus(${order.id})">
+          ${order.status}
+        </button>
+      </li>`;
+    });
+    html += `</ul>`;
+    container.innerHTML += html;
+  }
+}
+
+
+function toggleOrderStatus(orderId) {
+  const index = orders.findIndex(o => o.id === orderId);
+  if (index !== -1) {
+    orders[index].status = "Sent";
+    setTimeout(() => {
+      orders.splice(index, 1);
+      displayOrders();
+    }, 300);
+  }
+}
+
+
+displayOrders();
+</script>
+
+</body>
+</html>

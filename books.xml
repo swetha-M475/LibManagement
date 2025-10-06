@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<themes>
+  <theme name="Fiction">
+    <book>
+      <name>Imaginary</name>
+      <author>Charles</author>
+      <price>300</price>
+      <discount>10</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/81eB+7+CkUL.jpg</img>
+    </book>
+    <book>
+      <name>Green World</name>
+      <author>Mike</author>
+      <price>250</price>
+      <discount>5</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/91uwocAMtSL.jpg</img>
+    </book>
+    <book>
+      <name>Blue Sky</name>
+      <author>Anna</author>
+      <price>400</price>
+      <discount>15</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/71d5fmdU1tL.jpg</img>
+    </book>
+    <book>
+      <name>Golden Leaf</name>
+      <author>Sam</author>
+      <price>320</price>
+      <discount>0</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/81vpsIs58WL.jpg</img>
+    </book>
+    <book>
+      <name>Ocean Dreams</name>
+      <author>Eve</author>
+      <price>280</price>
+      <discount>20</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/91uwocAMtSL.jpg</img>
+    </book>
+  </theme>
+
+  <theme name="Motivation">
+    <book>
+      <name>Run</name>
+      <author>Charles</author>
+      <price>180</price>
+      <discount>10</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/81drfTT9ZfL.jpg</img>
+    </book>
+    <book>
+      <name>Mountain</name>
+      <author>Charlie</author>
+      <price>250</price>
+      <discount>0</discount>
+      <img>https://m.media-amazon.com/images/I/41P3Z+TTdML._SL500_.jpg</img>
+    </book>
+    <book>
+      <name>Never Quit</name>
+      <author>John</author>
+      <price>350</price>
+      <discount>15</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/81dQwQlmAXL.jpg</img>
+    </book>
+    <book>
+      <name>Dream Big</name>
+      <author>Sara</author>
+      <price>400</price>
+      <discount>5</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/81-QB7nDh4L.jpg</img>
+    </book>
+    <book>
+      <name>Power Within</name>
+      <author>Alex</author>
+      <price>300</price>
+      <discount>20</discount>
+      <img>https://images-na.ssl-images-amazon.com/images/I/81-QB7nDh4L.jpg</img>
+    </book>
+  </theme>
+
+  <theme name="Technology">
+    <book>
+      <name>AI Revolution</name>
+      <author>David</author>
+      <price>500</price>
+      <discount>10</discount>
+      <img>https://m.media-amazon.com/images/I/41jwQG7T5zL.jpg</img>
+    </book>
+    <book>
+      <name>Code Masters</name>
+      <author>Sophia</author>
+      <price>450</price>
+      <discount>15</discount>
+      <img>https://m.media-amazon.com/images/I/51Zymoq7UnL._SL500_.jpg</img>
+    </book>
+    <book>
+      <name>Digital Future</name>
+      <author>Liam</author>
+      <price>600</price>
+      <discount>5</discount>
+      <img>https://m.media-amazon.com/images/I/41JSmKkJ8EL._SL500_.jpg</img>
+    </book>
+    <book>
+      <name>Tech World</name>
+      <author>Oliver</author>
+      <price>480</price>
+      <discount>20</discount>
+      <img>https://m.media-amazon.com/images/I/41b9wU4PVaL._SL500_.jpg</img>
+    </book>
+    <book>
+      <name>Innovators</name>
+      <author>Grace</author>
+      <price>520</price>
+      <discount>10</discount>
+      <img>https://m.media-amazon.com/images/I/41g2aY3FV-L._SL500_.jpg</img>
+    </book>
+  </theme>
+
+ 
+</themes>

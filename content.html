@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <style>
+    body {
+      background: url("https://img.freepik.com/free-photo/still-life-books-versus-technology_23-2150062975.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }
+    form {
+      width: 400px;
+      margin: 5% auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    h1 { text-align: center; margin-bottom: 20px; }
+    .inp-ele { margin-bottom: 15px; }
+    .inp-ele label { display: block; margin-bottom: 5px; font-weight: bold; }
+    .inp-ele input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    .error { color: red; font-size: 14px; margin-top: 3px; }
+    #sub { text-align: center; }
+    #sub button { padding: 10px 20px; background-color: teal; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    #response { text-align: center; font-weight: bold; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <form id="reg">
+    <h1>Sign Up</h1>
+
+    <div class="inp-ele">
+      <label>Name:</label>
+      <input name="name" type="text" required>
+      <div id="nameError" class="error"></div>
+    </div>
+
+    <div class="inp-ele">
+      <label>Email:</label>
+      <input name="email" type="email" required>
+      <div id="emailError" class="error"></div>
+    </div>
+
+    <div class="inp-ele">
+      <label>Phone:</label>
+      <input name="phone" type="text" required>
+      <div id="phoneError" class="error"></div>
+    </div>
+
+    <div class="inp-ele">
+      <label>Password:</label>
+      <input name="password" type="password" required>
+      <div id="passwordError" class="error"></div>
+    </div>
+
+    <div class="inp-ele">
+      <label>Confirm Password:</label>
+      <input name="cpassword" type="password" required>
+      <div id="cpasswordError" class="error"></div>
+    </div>
+
+    <div id="sub">
+      <button type="submit">Sign Up</button>
+    </div>
+    <div id="response"></div>
+  </form>
+
+  <script>
+  
+    function validateField(fieldName, fieldValue, extra = {}) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "validate.jsp", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById(fieldName + "Error").innerHTML = xhr.responseText;
+        }
+      };
+
+      var params = "field=" + encodeURIComponent(fieldName) + "&value=" + encodeURIComponent(fieldValue);
+      for (let key in extra) {
+        params += "&" + key + "=" + encodeURIComponent(extra[key]);
+      }
+      xhr.send(params);
+    }
+
+  
+    var form = document.getElementById("reg");
+    form.name.onblur = function() { validateField("name", this.value); };
+    form.email.onblur = function() { validateField("email", this.value); };
+    form.phone.onblur = function() { validateField("phone", this.value); };
+    form.password.onblur = function() { validateField("password", this.value); };
+    form.cpassword.onblur = function() { validateField("cpassword", this.value, {password: form.password.value}); };
+
+  
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "register.jsp", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          if (xhr.responseText.trim() === "SUCCESS") {
+            window.location.href = "books.html"; 
+          } else {
+            document.getElementById("response").innerHTML = xhr.responseText;
+          }
+        }
+      };
+
+      var params = "name=" + encodeURIComponent(form.name.value) +
+                   "&email=" + encodeURIComponent(form.email.value) +
+                   "&phone=" + encodeURIComponent(form.phone.value) +
+                   "&password=" + encodeURIComponent(form.password.value) +
+                   "&cpassword=" + encodeURIComponent(form.cpassword.value);
+      xhr.send(params);
+    };
+  </script>
+</body>
+</html>

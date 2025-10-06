@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home - Oxford's Library</title>
+  <link rel="stylesheet" href="style.css">
+  <style>	
+    .content {
+      background-color: rgba(255, 255, 255, 0.92);
+      margin: 40px auto;
+      padding: 30px;
+      max-width: 900px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    h2 { color: #2c3e50; }
+    .section { margin-top: 30px; text-align: left; }
+    .section h3 { color: #2c3e50; margin-bottom: 10px; }
+    .section p { line-height: 1.6; }
+    iframe { width: 100%; height: 200px; margin-top: 20px; border: 1px solid #ccc; }
+    button { margin: 10px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>OXFORD'S LIBRARY</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="content.html">Sign Up</a></li>
+        <li><a name="login" href="login.jsp">Login</a></li>
+        <li><a href="Admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="content">
+    <h2>Welcome to Oxford's Library</h2>
+    <p>Discover a wide range of books across genres including Fiction, Motivation, and Research.</p>
+
+    <div class="section">
+      <h3> About the Library</h3>
+      <p>Oxford's Library is one of the most comprehensive libraries in the region...</p>
+    </div>
+
+    <div class="section">
+      <h3>Location & Contact</h3>
+      <p><strong>Address:</strong> 21 University Lane, Avinashi, Coimbatore</p>
+      <p><strong>Phone:</strong> +9876543210</p>
+      <p><strong>Email:</strong> contact@oxfordlibrary.edu</p>
+      <p><strong>Timings:</strong> Monday – Saturday | 9:00 AM – 7:00 PM</p>
+    </div>
+
+    <!-- Button to trigger alert -->
+    <button onclick="alert('Welcome to Oxford Library!')">Show Alert</button>
+
+    <!-- Iframe -->
+    <iframe src="https://www.example.com" name="libraryFrame"></iframe>
+
+    <!-- Button to open new window -->
+    <button onclick="window.open('https://www.google.com', '_blank')">Open Google in New Window</button>
+  </div>
+
+  <footer>
+    &copy; Oxford's Library 2025, All rights reserved.
+  </footer>
+</body>
+</html>

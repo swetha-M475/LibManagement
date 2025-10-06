@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <button onClick="load('reviews.xml','xml')">Reviews</button>
+ <div id="reviews"></div>
+ 
+</body>
+<script>
+    function load(url,type)
+    {
+    	   var doc=ajx.responseXML;
+		   var items=doc.getElementsByTagName('reviews');
+		   var op='';
+		   for(let i=0;i<items.length;i++)
+			   {
+			   op+=items[i].textContent+"<br>"
+			   }
+		   document.getElementById("reviews").innerHTML=op;
+		  
+    }
+</script>
+</html>

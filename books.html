@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Books - Oxford's Library</title>
+<style>
+body {
+  font-family: Georgia, serif;
+  background: url('https://img.freepik.com/free-photo/still-life-books-versus-technology_23-2150062975.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  color: #2c3e50;
+}
+header {
+  background: rgba(44, 62, 80, 0.9);
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 3px solid #e67e22;
+}
+header nav ul {
+  list-style: none;
+  padding: 0;
+}
+header nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+header nav ul li a:hover {
+  color: #e67e22;
+}
+.content {
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  margin: 30px auto;
+  width: 95%;
+  max-width: 1200px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+.search-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.search-container select, .search-container input {
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+th {
+  background: #2c3e50;
+  color: white;
+  padding: 12px;
+}
+td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 10px;
+}
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.book-cover {
+  width: 70px;
+  height: 90px;
+  border-radius: 4px;
+}
+.add-cart, .buy-now, .review, .areview {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: transform 0.2s, background 0.3s;
+}
+.add-cart { background: #3498db; color: white; }
+.buy-now { background: #2ecc71; color: white; }
+.review { background: #8e44ad; color: white; }
+.areview { background: #e67e22; color: white; }
+.add-cart:hover, .buy-now:hover, .review:hover, .areview:hover {
+  transform: scale(1.05);
+}
+.discount {
+  color: red;
+  font-weight: bold;
+}
+footer {
+  text-align: center;
+  background: rgba(44, 62, 80, 0.9);
+  color: white;
+  padding: 15px;
+  margin-top: 20px;
+}
+.cart-btn {
+  background: #e67e22;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+}
+h3 {
+  color: #2c3e50;
+  margin-top: 30px;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>OXFORD'S LIBRARY</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="cart.jsp">Cart</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="content">
+  <div class="search-container">
+    <select id="themeSelect" onchange="loadBooksByTheme()">
+      <option value="">-- Select Theme --</option>
+      <option value="Fiction">Fiction</option>
+      <option value="Motivation">Motivation</option>
+      <option value="Technology">Technology</option>
+      <option value="Science">Science</option>
+      <option value="History">History</option>
+    </select>
+    <input type="text" id="search-book" placeholder="Search by Book Name">
+  </div>
+
+  <button class="cart-btn" onclick="window.location.href='cart.jsp'">Go to Cart</button>
+
+  <div id="book-sections"></div>
+</div>
+
+<footer>&copy; Oxford's Library 2025, All rights reserved.</footer>
+
+<script>
+const bookSections = document.getElementById("book-sections");
+
+
+function loadBooksByTheme() {
+  let theme = document.getElementById("themeSelect").value;
+  if (!theme) {
+    bookSections.innerHTML = "";
+    return;
+  }
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let data = JSON.parse(xhr.responseText);
+      renderBooks("Books in " + theme, data);
+    }
+  };
+  xhr.open("GET", "getBooks.jsp?theme=" + encodeURIComponent(theme), true);
+  xhr.send();
+}
+
+
+document.getElementById("search-book").addEventListener("keyup", function () {
+  let query = this.value.trim();
+  if (query.length === 0) {
+    bookSections.innerHTML = "";
+    return;
+  }
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let data = JSON.parse(xhr.responseText);
+      renderBooks("Search Results", data);
+    }
+  };
+  xhr.open("GET", "searchBooks.jsp?query=" + encodeURIComponent(query), true);
+  xhr.send();
+});
+
+function renderBooks(title, books) {
+  let html = `<h3>${title}</h3><table>
+              <tr><th>Cover</th><th>Name</th><th>Author</th><th>Price</th><th>Discount</th><th>Actions</th></tr>`;
+  if (books.length > 0) {
+    books.forEach(book => {
+      let discounted = book.price - (book.price * book.discount / 100);
+      html += `<tr>
+        <td><img src="${book.img}" class="book-cover"></td>
+        <td>${book.name}</td>
+        <td>${book.author}</td>
+        <td>₹${discounted.toFixed(2)}</td>
+        <td>${book.discount > 0 ? '<span class="discount">'+book.discount+'% OFF</span>' : '-'}</td>
+        <td>
+          <button class="add-cart" onclick="addToCart('${book.name}', ${discounted})">Add to Cart</button>
+          <button class="buy-now" onclick="buyNow('${book.name}', ${discounted})">Buy Now</button>
+          <button class="review" onclick="showReviews('${book.name}')">Show Reviews</button>
+          <button class="areview" onclick="addReviewForm('${book.name}')">Add Review</button>
+        </td>
+      </tr>`;
+    });
+  } else {
+    html += `<tr><td colspan="6">No books found</td></tr>`;
+  }
+  html += "</table>";
+  bookSections.innerHTML = html;
+}
+
+
+function addToCart(bookName, price) {
+  fetch(`addToCart.jsp?book=${encodeURIComponent(bookName)}&price=${price}`)
+    .then(() => alert(bookName + " added to cart!"));
+}
+function buyNow(bookName, price) {
+  fetch(`addToCart.jsp?book=${encodeURIComponent(bookName)}&price=${price}`)
+    .then(() => { window.location.href = 'cart.jsp'; });
+}
+function showReviews(bookName) {
+	  const xhr = new XMLHttpRequest();
+	  xhr.open("GET", "reviews.xml", true);
+
+	  xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	      const parser = new DOMParser();
+	      const xml = parser.parseFromString(xhr.responseText, "application/xml");
+	      const books = xml.getElementsByTagName("book");
+
+	      let output = `<h3>Reviews for ${bookName}</h3><ul>`;
+	      let found = false;
+
+	      for (let b of books) {
+	        if (b.getAttribute("name") === bookName) {
+	          found = true;
+	          const reviews = b.getElementsByTagName("review");
+	          for (let r of reviews) {
+	            output += `<li><b>${r.getAttribute("user")}</b> (${r.getAttribute("rating")}⭐): ${r.textContent}</li>`;
+	          }
+	        }
+	      }
+
+	      if (!found) output += "<li>No reviews yet</li>";
+	      output += "</ul>";
+
+	      const win = window.open("", "Reviews", "width=500,height=400");
+	      win.document.body.innerHTML = output;
+	    }
+	  };
+
+	  xhr.send();
+	}
+
+function addReviewForm(bookName) {
+  const user = prompt("Enter your name:");
+  if (!user) return;
+  const rating = prompt("Enter rating (1-5):");
+  if (!rating || isNaN(rating) || rating < 1 || rating > 5) {
+    alert("Invalid rating! Must be 1–5.");
+    return;
+  }
+  const comment = prompt("Enter your review:");
+  if (!comment) return;
+  fetch(`addReview.jsp?book=${encodeURIComponent(bookName)}&user=${encodeURIComponent(user)}&rating=${rating}&comment=${encodeURIComponent(comment)}`)
+    .then(res => res.text())
+    .then(msg => alert(msg));
+}
+</script>
+</body>
+</html>

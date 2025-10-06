@@ -1,0 +1,31 @@
+/* style.css */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: url('https://img.freepik.com/free-photo/still-life-books-versus-technology_23-2150062975.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+  }
+  
+  header, footer {
+    background-color: rgba(44, 62, 80, 0.9);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+  }
+  
+  nav a {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
