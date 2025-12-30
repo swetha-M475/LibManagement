@@ -80,5 +80,5 @@ The back-end handles data storage, business logic, and validation.
 ---
 
 ## Author
-**Your Name** – Library Management and Book Selling Platform  
+**Swetha M** – Library Management and Book Selling Platform  
 
